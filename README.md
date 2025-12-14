@@ -1,75 +1,39 @@
-🍕 Simulación de Pizzería Concurrente en Java
-Descripción general
+🍕 Pizzeria Concurrente — Java
 
-Este proyecto es una aplicación de práctica desarrollada en Java cuyo objetivo es aplicar y comprender los principios de programación concurrente, mediante el uso de multihilos (multithreading) y multiprocesos, simulando el funcionamiento interno de una pizzería.
+Simulación de una pizzería usando multihilos y multiprocesos en Java para practicar programación concurrente.
 
-La aplicación modela distintos componentes del flujo de trabajo de una pizzería real —recepción de pedidos, preparación, horneado y entrega— ejecutándose de forma paralela y coordinada, permitiendo observar el comportamiento de múltiples tareas concurrentes y la gestión de recursos compartidos.
+🚀 Objetivo
 
-Objetivos del proyecto
+Aprender y aplicar:
 
-Aplicar conceptos de concurrencia y paralelismo en Java.
+🧵 Multithreading
 
-Comprender la diferencia práctica entre multihilos y multiprocesos.
+⚙️ Multiprocessing
 
-Gestionar recursos compartidos de forma segura.
+🔒 Sincronización de recursos
 
-Evitar problemas comunes como:
+⚠️ Prevención de race conditions y deadlocks
 
-Condiciones de carrera
-
-Interbloqueos (deadlocks)
-
-Inconsistencias de datos
-
-Simular un entorno realista con múltiples tareas simultáneas.
-
-Funcionalidad principal
-
-Simulación de pedidos concurrentes.
-
-Procesos independientes para las distintas etapas de la pizzería.
-
-Ejecución paralela de tareas mediante hilos.
-
-Sincronización y coordinación entre componentes.
-
-Registro por consola del flujo de ejecución para análisis y depuración.
-
-Tecnologías y conceptos utilizados
-
-Java
-
-Programación concurrente
-
-Multithreading
-
-Multiprocessing
-
-Sincronización de hilos
-
-Recursos compartidos
-
-Requisitos
-
-Java JDK 8 o superior
-
-IDE o terminal con soporte para Java
-
-Git (opcional, para control de versiones)
-
-Ejecución
-
-Desde la raíz del proyecto:
-
-javac src/main/java/pizzeria/*.java
-java pizzeria.Main
+🏗️ Flujo de la pizzería
+📥 Pedido → 👨‍🍳 Preparación → 🔥 Horno → 🚴 Entrega
 
 
-O ejecutar directamente desde el IDE de tu preferencia.
+Cada etapa se ejecuta de forma concurrente.
 
-Estado del proyecto
+🛠️ Tecnologías
 
-📌 Proyecto educativo y experimental, enfocado en el aprendizaje de programación concurrente.
+☕ Java
+
+🧵 Threads
+
+⚙️ Procesos
+
+🔐 Concurrencia y sincronización
+
+
+📌 Estado
+
+🧪 Proyecto educativo / de práctica
 No está destinado a uso en producción.
 
 Autor: albertoportfolio

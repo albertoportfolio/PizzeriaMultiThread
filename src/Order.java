@@ -41,7 +41,7 @@ public class Order {
                 }
             }
 
-            String clase = "C:\\Users\\alpen\\OneDrive\\Documentos\\Pizzeria\\src\\Manufacture.java";
+            String clase = "src/Manufacture.java";
             String javaHome = System.getProperty("java.home");
             String javaBin = javaHome + File.separator + "bin" + File.separator + "java";
             String classpath = System.getProperty("java.class.path");

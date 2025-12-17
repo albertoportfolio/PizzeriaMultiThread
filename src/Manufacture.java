@@ -52,6 +52,7 @@ public class Manufacture implements Runnable {
                     synchronized (arrPizza) {
                         arrPizza.add(tipus);
                     }
+                    System.out.println("Pizza Introducida: " + tipus + " a la hora " + simpleDateFormat.format(new Date()));
                 } else {
                     System.out.println("Se han añadido todas las pizzas Margarida");
                 }
@@ -64,6 +65,7 @@ public class Manufacture implements Runnable {
                     synchronized (arrPizza) {
                         arrPizza.add(tipus);
                     }
+                    System.out.println("Pizza Introducida: " + tipus + " a la hora " + simpleDateFormat.format(new Date()));
                 } else {
                     System.out.println("Se han añadido todas las pizzas Proscuito");
                 }
@@ -76,13 +78,14 @@ public class Manufacture implements Runnable {
                     synchronized (arrPizza) {
                         arrPizza.add(tipus);
                     }
+                    System.out.println("Pizza Introducida: " + tipus + " a la hora " + simpleDateFormat.format(new Date()));
                 } else {
                     System.out.println("Se han añadido todas las pizzas Carbonara");
                 }
                 break;
         }
 
-        System.out.println("Pizza Introducida: " + tipus + " a la hora " + simpleDateFormat.format(new Date()));
+
     }
 
 
@@ -114,7 +117,13 @@ public class Manufacture implements Runnable {
                 }
                 hilos.clear();
             }
-
+            try {
+                for (Thread hil : hilos) {
+                    hil.join();
+                }
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
 
         for (int i = 0; i < arrPizza.size(); i++) {

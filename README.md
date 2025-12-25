@@ -6,13 +6,13 @@ Simulation of a pizzeria using multithreading and multiprocessing in Java to pra
 
 Learn and apply:
 
-🧵 Multithreading
+- 🧵 Multithreading
 
-⚙️ Multiprocessing
+- ⚙️ Multiprocessing
 
-🔒 Resource synchronization
+- 🔒 Resource synchronization
 
-⚠️ Prevention of race conditions and deadlocks
+- ⚠️ Prevention of race conditions and deadlocks
 
 ## 🏗️ Pizzeria workflow
 📥 Order → 👨‍🍳 Preparation → 🔥 Oven → 🚴 Delivery
@@ -21,15 +21,16 @@ Each stage runs concurrently.
 
 ## 🛠️ Technologies
 
-☕ Java
+- ☕ Java
 
-🧵 Threads
+- 🧵 Threads
 
-⚙️ Processes
+- ⚙️ Processes
 
-🔐 Concurrency and synchronization
+- 🔐 Concurrency and synchronization
 
-## Author: albertoportfolio
+## Author:
+albertoportfolio
 
 ## License
 This project is distributed for educational purposes. You are free to adapt and reuse it for learning.

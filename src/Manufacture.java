@@ -5,131 +5,131 @@ import java.util.Date;
 public class Manufacture implements Runnable {
 
     /*
-     *se crean las variables para pasar al main por parametros
+     * Variables to pass parameters from main
      */
-    String tipus;
+    String pizzaType;
     int numPizzas;
-    int tempsfabric;
-    static ArrayList<String> arrPizza;
-    static int contmarg, contpros, contcarb = 0;
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYYMMdd_HHmmss");
+    int fabricationTime;
+    static ArrayList<String> pizzaList;
+    static int margCount, prosCount, carbCount = 0;
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
 
     /*
-     *se crea el constructor
+     * Constructor
      */
-    public Manufacture(String tipus, int numPizzas, int tempsfabric, ArrayList<String> arrPizza) {
-        this.tipus = tipus;
+    public Manufacture(String pizzaType, int numPizzas, int fabricationTime, ArrayList<String> pizzaList) {
+        this.pizzaType = pizzaType;
         this.numPizzas = numPizzas;
-        this.tempsfabric = tempsfabric;
-        this.arrPizza = arrPizza;
+        this.fabricationTime = fabricationTime;
+        this.pizzaList = pizzaList;
     }
 
     /*
-     *metodo para que cada pizza espere el tiempo indicado
+     * Method to simulate fabrication time for each pizza
      */
+    public static void simulateFabrication(int fabricationTime) {
+        long startTime = System.currentTimeMillis();
+        long endTime = startTime + fabricationTime;
+        int iteration = 0;
 
-    public static void processFabricacio(int tempsfabric) {
-        long tempsInici = System.currentTimeMillis();
-        long tempsFinal = tempsInici + tempsfabric;
-        int iteracion = 0;
-
-        while (System.currentTimeMillis() < tempsFinal) {
-            iteracion++;
+        while (System.currentTimeMillis() < endTime) {
+            iteration++;
         }
     }
 
     /*
-     *metodo run que ejecuta cada hilo, synchronized en la clase para que cada vez que se ejecute se bloquee la clase entera
-     * contador con static para controlar que no se añadan pizzas extra
+     * Run method executes each thread.
+     * Synchronized on pizzaList to avoid adding extra pizzas concurrently.
      */
     @Override
     public void run() {
-        switch (tipus) {
-            case "Margarida":
-                if (contmarg < numPizzas) {
-                    contmarg++;
-                    processFabricacio(tempsfabric);
-                    synchronized (arrPizza) {
-                        arrPizza.add(tipus);
+        switch (pizzaType) {
+            case "Margarita":
+                if (margCount < numPizzas) {
+                    margCount++;
+                    simulateFabrication(fabricationTime);
+                    synchronized (pizzaList) {
+                        pizzaList.add(pizzaType);
                     }
-                    System.out.println("Pizza Introducida: " + tipus + " a la hora " + simpleDateFormat.format(new Date()));
+                    System.out.println("Pizza added: " + pizzaType + " at " + sdf.format(new Date()));
                 } else {
-                    System.out.println("Se han añadido todas las pizzas Margarida");
+                    System.out.println("All Margarita pizzas have been added");
                 }
                 break;
 
-            case "Proscuito":
-                if (contpros < numPizzas) {
-                    contpros++;
-                    processFabricacio(tempsfabric);
-                    synchronized (arrPizza) {
-                        arrPizza.add(tipus);
+            case "Prosciutto":
+                if (prosCount < numPizzas) {
+                    prosCount++;
+                    simulateFabrication(fabricationTime);
+                    synchronized (pizzaList) {
+                        pizzaList.add(pizzaType);
                     }
-                    System.out.println("Pizza Introducida: " + tipus + " a la hora " + simpleDateFormat.format(new Date()));
+                    System.out.println("Pizza added: " + pizzaType + " at " + sdf.format(new Date()));
                 } else {
-                    System.out.println("Se han añadido todas las pizzas Proscuito");
+                    System.out.println("All Prosciutto pizzas have been added");
                 }
                 break;
 
             case "Carbonara":
-                if (contcarb < numPizzas) {
-                    contcarb++;
-                    processFabricacio(tempsfabric);
-                    synchronized (arrPizza) {
-                        arrPizza.add(tipus);
+                if (carbCount < numPizzas) {
+                    carbCount++;
+                    simulateFabrication(fabricationTime);
+                    synchronized (pizzaList) {
+                        pizzaList.add(pizzaType);
                     }
-                    System.out.println("Pizza Introducida: " + tipus + " a la hora " + simpleDateFormat.format(new Date()));
+                    System.out.println("Pizza added: " + pizzaType + " at " + sdf.format(new Date()));
                 } else {
-                    System.out.println("Se han añadido todas las pizzas Carbonara");
+                    System.out.println("All Carbonara pizzas have been added");
                 }
                 break;
         }
-
-
     }
-
 
     public static void main(String[] args) {
         /*
-         *arraylist que guarda todas las pizzas
+         * List to store all pizzas
          */
+        ArrayList<String> pizzaList = new ArrayList<>();
 
-        ArrayList<String> arrPizza = new ArrayList<>();
+        Manufacture manufacture = new Manufacture(
+                args[0],
+                Integer.parseInt(args[1]),
+                Integer.parseInt(args[2]),
+                pizzaList
+        );
 
-
-        Manufacture mf = new Manufacture(args[0], Integer.parseInt(args[1]), Integer.parseInt(args[2]), arrPizza);
-        ArrayList<Thread> hilos = new ArrayList<>();
+        ArrayList<Thread> threads = new ArrayList<>();
         for (int i = 0; i < Integer.parseInt(args[1]); i++) {
-            Thread t = new Thread(mf);
-            hilos.add(t);
+            Thread t = new Thread(manufacture);
+            threads.add(t);
             t.start();
 
             /*
-             *si hay 8 hilos en ejecucion, se hace un join de los hilos
+             * If there are 8 threads running, join them
              */
-            if (hilos.size() == 8) {
+            if (threads.size() == 8) {
                 try {
-                    for(Thread hil : hilos) {
-                        hil.join();
+                    for (Thread thread : threads) {
+                        thread.join();
                     }
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-                hilos.clear();
+                threads.clear();
             }
+
             try {
-                for (Thread hil : hilos) {
-                    hil.join();
+                for (Thread thread : threads) {
+                    thread.join();
                 }
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
         }
 
-        for (int i = 0; i < arrPizza.size(); i++) {
-            System.out.println(arrPizza.get(i));
+        for (String pizza : pizzaList) {
+            System.out.println(pizza);
         }
     }
-
-
 }
+

@@ -1,4 +1,3 @@
-
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -10,81 +9,86 @@ public class Order {
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
-        Scanner teclado = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
+        String runAgain = "y";
 
-        String ejecutar = "s";
+        while (runAgain.equalsIgnoreCase("y")) {
 
-        while (ejecutar.equals("s")) {
-
-            boolean pedidoCorrecto = false;
-            String nombre = "";
-            int cantidad = 0;
-            int tiempo = 0;
+            boolean validOrder = false;
+            String pizzaName = "";
+            int quantity = 0;
+            int fabricationTime = 0;
 
             /*
-             * bucle para que el usuario introduzcapizzas, se
-             * le pasan las variables para usarla en los args
-             *
-             * */
-            while (!pedidoCorrecto) {
+             * Loop to allow the user to enter pizza orders.
+             * Variables will be used as arguments for the process.
+             */
+            while (!validOrder) {
                 try {
-                    System.out.print("nombre de Pizza : ");
-                    nombre = (teclado.nextLine());
-                    System.out.print("Numero de Pizzas: ");
-                    cantidad = Integer.parseInt(teclado.nextLine());
-                    System.out.print("Temps de Fabricacio en ms: ");
-                    tiempo = Integer.parseInt(teclado.nextLine());
-                    pedidoCorrecto = true;
+                    System.out.print("Pizza name: ");
+                    pizzaName = scanner.nextLine();
+
+                    System.out.print("Number of pizzas: ");
+                    quantity = Integer.parseInt(scanner.nextLine());
+
+                    System.out.print("Fabrication time in ms: ");
+                    fabricationTime = Integer.parseInt(scanner.nextLine());
+
+                    validOrder = true;
                 } catch (Exception e) {
                     e.printStackTrace();
-                    pedidoCorrecto = false;
+                    validOrder = false;
                 }
             }
 
-            String clase = "src/Manufacture.java";
+            String classFile = "src/Manufacture.java";
             String javaHome = System.getProperty("java.home");
             String javaBin = javaHome + File.separator + "bin" + File.separator + "java";
             String classpath = System.getProperty("java.class.path");
-            String className = clase;
+            String className = classFile;
+
             ArrayList<String> command = new ArrayList<>();
             command.add(javaBin);
             command.add("-cp");
             command.add(classpath);
             command.add(className);
-            command.add(nombre);
-            command.add(String.valueOf(cantidad));
-            command.add(String.valueOf(tiempo));
-            ProcessBuilder builder = new ProcessBuilder(command);
-            System.out.println("------ Pizzeria ----- ");
-            System.out.println("1. para guardar en archivo");
-            System.out.println("2. para ejecutar en pantalla");
+            command.add(pizzaName);
+            command.add(String.valueOf(quantity));
+            command.add(String.valueOf(fabricationTime));
 
-            String opcionSalida = teclado.nextLine();
-            Process p;
-            switch (opcionSalida) {
-                /*
-                 * opcion para guardar la salida de pantalla en archivo o que se ejecute en pantalla
-                 * */
+            ProcessBuilder builder = new ProcessBuilder(command);
+
+            System.out.println("------ Pizzeria ----- ");
+            System.out.println("1. Save output to file");
+            System.out.println("2. Execute on screen");
+
+            String outputOption = scanner.nextLine();
+            Process process;
+
+            /*
+             * Option to save output to a file or display on screen
+             */
+            switch (outputOption) {
                 case "1":
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYYMMdd_HHmmss");
-                    File ficheroLog = new File(simpleDateFormat.format(new Date()));
-                    p = builder.redirectOutput(ficheroLog).start();
-                    p.waitFor();
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+                    File logFile = new File(sdf.format(new Date()) + ".txt");
+                    process = builder.redirectOutput(logFile).start();
+                    process.waitFor();
                     break;
+
                 case "2":
-                    p = builder.inheritIO().start();
-                    p.waitFor();
+                    process = builder.inheritIO().start();
+                    process.waitFor();
                     break;
+
                 default:
                     break;
-
             }
 
-            System.out.print("\nEjecutar de nuevo la aplicacion (s/n)?: ");
-            ejecutar = teclado.nextLine();
-
+            System.out.print("\nRun the application again (y/n)?: ");
+            runAgain = scanner.nextLine();
         }
-        teclado.close();
-    }
 
+        scanner.close();
+    }
 }

@@ -1,42 +1,45 @@
-🍕 Pizzeria Concurrente — Java
+🍕 Concurrent Pizzeria — Java
 
-Simulación de una pizzería usando multihilos y multiprocesos en Java para practicar programación concurrente.
+Simulation of a pizzeria using multithreading and multiprocessing in Java to practice concurrent programming.
 
-🚀 Objetivo
+🚀 Objective
 
-Aprender y aplicar:
+Learn and apply:
 
 🧵 Multithreading
 
 ⚙️ Multiprocessing
 
-🔒 Sincronización de recursos
+🔒 Resource synchronization
 
-⚠️ Prevención de race conditions y deadlocks
+⚠️ Prevention of race conditions and deadlocks
 
-🏗️ Flujo de la pizzería
-📥 Pedido → 👨‍🍳 Preparación → 🔥 Horno → 🚴 Entrega
+🏗️ Pizzeria workflow
+📥 Order → 👨‍🍳 Preparation → 🔥 Oven → 🚴 Delivery
 
+Each stage runs concurrently.
 
-Cada etapa se ejecuta de forma concurrente.
-
-🛠️ Tecnologías
+🛠️ Technologies
 
 ☕ Java
 
 🧵 Threads
 
-⚙️ Procesos
+⚙️ Processes
 
-🔐 Concurrencia y sincronización
+🔐 Concurrency and synchronization
 
+📌 Status
 
-📌 Estado
+🧪 Educational / practice project. Not intended for production use.
 
-🧪 Proyecto educativo / de práctica
-No está destinado a uso en producción.
+Author: albertoportfolio
 
-Autor: albertoportfolio
+Project developed for academic purposes and personal practice.
+
+License
+
+This project is distributed for educational purposes. You are free to adapt and reuse it for learning.
 
 Proyecto desarrollado con fines académicos y de práctica personal.
 
